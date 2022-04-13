@@ -195,7 +195,7 @@ li {
 
 .categorySort {
     overflow: hidden;
-    margin: 30px 0;
+    margin: 30px auto;
 }
 
 .sort {
