@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevator</title>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .container {
+            width: 300px;
+            position: relative;
+            background: #999;
+        }
+
+        .elevator {
+            padding: 20px;
+        }
+
+        .frame {
+            width: 260px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .frame ul {
+            height: 1600px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .frame ul li {
+            width: 260px;
+            height: 400px;
+            background: white;
+        }
+
+        .wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btns {
+            margin: 350px 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .frame ul .yellow {
+            background: palegoldenrod;
+        }
+
+        .frame ul .green {
+            background: palegreen;
+        }
+
+        .frame ul .blue {
+            background: paleturquoise;
+        }
+
+        .frame ul .purple {
+            background: palevioletred;
+        }
+
+        .screen {
+            width: 100px;
+            height: 40px;
+            position: absolute;
+            top: -50px;
+            left: 100px;
+            background: #333;
+            padding: 5px 10px;
+        }
+
+        .screen p {
+            font-weight: bold;
+            color: rgb(235, 47, 47);
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="container">
+            <div class="screen">
+                <p>1</p>
+            </div>
+            <div class="elevator">
+                <div class="frame">
+                    <ul>
+                        <li class="yellow" data-index="1"></li>
+                        <li class="green" data-index="2"></li>
+                        <li class="blue" data-index="3"></li>
+                        <li class="purple" data-index="4"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="btns">
+            <div class="up">▲</div>
+            <div class="down">▼</div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+
+            function up() {
+                $(".frame>ul").animate({ top: -400 }, 500,
+                    function () {
+                        $(this).children("li:first").insertAfter($(this).children("li:last"));
+                        $(this).css("top", 0);
+                        $(".screen p").text($(".frame ul li").eq(0).attr("data-index"));
+                    })
+
+            }
+
+            function down() {
+                $(".frame ul").children("li:last").insertBefore($(".frame ul").children("li:first"));
+                $(".frame ul").css("top", -400);
+                $(".frame ul").animate({ top: 0 }, 500)
+
+                $(".screen p").text($(".frame ul li").eq(0).attr("data-index"));
+            }
+
+            $(".up").off().on("click", up);
+            $(".down").off().on("click", down);
+        })
+    </script>
+</body>
+
+</html>
