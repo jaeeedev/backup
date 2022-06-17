@@ -1,0 +1,1113 @@
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+/*300 400 700 800*/
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+:root {
+    --mainblue: #009AFF;
+    --sky: #A7D7F1;
+    --yellow: #FFC831;
+    --green: #23E685;
+    --red: #FF8F8F;
+    --blue: #2bc3ff;
+    --mint: #7ED9D9;
+    --purple: #AF81DC;
+    --btnblue: #0FA0E4;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'pretendard', 'sans-serif';
+    color: #222;
+}
+
+a {
+    text-decoration: none;
+    color: #222;
+}
+
+li {
+    list-style: none;
+}
+
+.container {
+    padding: 20px;
+}
+
+h2 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+
+/* 헤더 */
+
+.innerHeader {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 1px 9px 1px rgba(0, 0, 0, 0.15);
+}
+
+.logo h1 {
+    width: 140px;
+}
+
+.logo h2 a {
+    display: block;
+    width: 100%;
+}
+
+.logo a img {
+    display: block;
+    width: 100%;
+}
+
+.forPC {
+    display: none;
+}
+
+.forPC .innerHeader {
+    display: none;
+}
+
+/*  사이드내브   */
+
+.sideNavBtn:checked~.sideNav {
+    left: 0;
+}
+
+.sideNav {
+    z-index: 1111;
+    position: absolute;
+    left: -80%;
+    width: 80%;
+    height: calc(100% - 60px);
+    /* 헤더 높이 아래부터 사이드내브가 시작되어
+     푸터가 들뜨는 문제발생 -> 헤더 높이를 뺴줬음 */
+    background: var(--mainblue);
+    overflow: hidden;
+    transition: all 0.4s;
+}
+
+.sideNav .sideNavLabel {
+    position: absolute;
+    width: 100%;
+    color: white;
+    font-size: 30px;
+    margin-top: 20px;
+    left: 85%;
+}
+
+.sideNav>ul {
+    margin-top: 50px;
+}
+
+.sideNavBtn {
+    display: none;
+}
+
+.sideNav>ul>li {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    font-weight: 700;
+    color: white;
+}
+
+.sideNav a {
+    color: white;
+    display: block;
+}
+
+.sideNav>label>i {
+    margin-right: 20px;
+}
+
+/*  사이드내브안의리스트~~~~~!!!!!!!  */
+
+.sideNav input[type="checkbox"] {
+    display: none;
+}
+
+.sideNav .hideList {
+    background: white;
+    display: none;
+    color: #222;
+    line-height: 1.6;
+}
+
+.sideNav .hideList a {
+    color: #222;
+    font-weight: 600;
+}
+
+.introLibOpen:checked~.hideList01 {
+    display: block;
+}
+
+.findBookOpen:checked~.hideList02 {
+    display: block;
+}
+
+.readingChangwon:checked~.hideList03 {
+    display: block;
+}
+
+.myPage:checked~.hideList04 {
+    display: block;
+}
+
+.useHomepage:checked~.hideList05 {
+    display: block;
+}
+
+.libSchedule:checked~.hideList06 {
+    display: block;
+}
+
+/* 현재도서관 */
+
+.currentLib {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+
+}
+
+.libImg {
+    width: 100%;
+    height: 280px;
+    background: #ccc;
+}
+
+.libImg img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.currentLibInfo {
+    position: absolute;
+    top: 30%;
+    right: 0;
+}
+
+.currentLibInfo h2 {
+    margin: 0 10px 5px 0;
+    color: white;
+}
+
+.currentLibInfo h3 a {
+    background: white;
+    font-size: 16px;
+    padding: 6px 15px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.currentLibInfo h3 a:active {
+    background: var(--mainblue);
+    color: white;
+}
+
+.currentLib .changeLib {
+    position: absolute;
+    bottom: 0;
+    background: var(--mainblue);
+    padding: 10px 15px;
+    font-size: 15px;
+    color: white;
+}
+
+
+
+.showSelectLib {
+    display: none;
+}
+
+.showSelectLib:checked~.libraryBox {
+    height: 120px;
+}
+
+.libraryBox {
+    overflow: hidden;
+    height: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: center;
+    transition: all 0.3s;
+}
+
+.libraryBox div {
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.libraryBox .selected {
+    width: 100%;
+    background: var(--sky);
+    text-align: center;
+    font-weight: 800;
+}
+
+/* 메인(서치, 휴관)  */
+
+.main {
+    background: #f3f3f3;
+    position: relative;
+    overflow: hidden;
+}
+
+.decoBar01 {
+    position: absolute;
+    width: 500px;
+    height: 50px;
+    background: var(--yellow);
+    border-radius: 40px;
+    transform: rotate(-38deg);
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.15);
+    left: -300px;
+    top: 170px;
+}
+
+.decoBar02 {
+    position: absolute;
+    width: 500px;
+    height: 65px;
+    background: var(--mainblue);
+    border-radius: 40px;
+    transform: rotate(-38deg);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    left: 170px;
+    top: -40px;
+}
+
+.decoBar03 {
+    position: absolute;
+    width: 300px;
+    height: 55px;
+    background: var(--green);
+    border-radius: 40px;
+    transform: rotate(-38deg);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    left: 270px;
+    top: 25px;
+}
+
+.decoBar04 {
+    position: absolute;
+    width: 300px;
+    height: 45px;
+    background: var(--red);
+    border-radius: 40px;
+    transform: rotate(-38deg);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    left: 450px;
+    top: 100px;
+}
+
+
+.main .search {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchBar {
+    display: flex;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.searchBar form {
+    display: flex;
+}
+
+.main .search input {
+    border: none;
+    width: 55vw;
+    padding-left: 13px;
+}
+
+.main .search input::placeholder {
+    font-size: 11px;
+    color: #999;
+    padding-left: 13px;
+}
+
+.main .search button {
+    width: 50px;
+}
+
+.main .search button:active {
+    background: var(--mainblue);
+    color: white;
+}
+
+.main .search p {
+    font-size: 14px;
+    font-weight: 800;
+    color: #222;
+    margin-top: 13px;
+    z-index: 1;
+}
+
+.searchBook {
+    border: none;
+    border-radius: 5px 0 0 5px;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px;
+    box-shadow: 2px 0 3px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+}
+
+.searchBar button {
+    border: none;
+    background: white;
+    border-radius: 0 5px 5px 0;
+    font-weight: 700;
+    font-size: 13px;
+    box-shadow: -2px 0 3px rgba(0, 0, 0, 0.15);
+}
+
+.offday {
+    padding: 20px;
+}
+
+.offday .offdaySchedule {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.offday .offdaySchedule div {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.15); */
+    padding: 15px;
+    flex: 1;
+}
+
+.offdaySchedule div h3 {
+    width: 100%;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.offdaySchedule div p {
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.offdaySchedule p span {
+    display: inline-block;
+    font-size: 13px;
+    background: #222;
+    border-radius: 1rem;
+    color: white;
+    width: 40px;
+    margin-right: 10px;
+    margin-bottom: 3px;
+    text-align: center;
+}
+
+.offHeader {
+    background: var(--sky);
+    width: 100%;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 12px;
+}
+
+.workTime {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font-size: 14px;
+    color: #666;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.tel {
+    font-size: 13px;
+    color: #666;
+    width: 90%;
+    text-align: center;
+    border-top: 1px solid var(--sky);
+    padding: 7px;
+}
+
+.offBottom {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+.offBottom>div {
+    flex: 1;
+}
+
+.offBottom .workTime p {
+    font-size: 12px;
+}
+
+
+/* 소식 */
+
+.news {
+    padding: 20px;
+}
+
+.newsTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.newsTitle span a {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #555;
+    padding: 5px 10px;
+    border-radius: 1rem;
+    background: #f3f3f3;
+}
+
+.newsTitle span a:active {
+    box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.news .notice-pre {
+    background: #222;
+    color: white;
+    padding: 1px 3px;
+    margin-right: 10px;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.newsList li a {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+
+
+
+/* 푸터 */
+
+.footer {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer a {
+    font-size: 16px;
+}
+
+.pcHeader {
+    display: none;
+}
+
+.pcFooter {
+    display: none;
+}
+
+.pcmainWrapper.container {
+    padding: 0;
+}
+
+
+.wrapMiddle {
+    display: none;
+}
+
+.bookMenu {
+    display: none;
+}
+
+.pcLibInfo {
+    display: none;
+}
+
+.pcmainWrapper .container {
+    padding: 0;
+}
+
+@media all and (min-width: 769px) {
+
+    .footer,
+    .deco,
+    .search,
+    .sideNav,
+    .currentLibInfo,
+    .changeLib,
+    .libraryBox {
+        display: none !important;
+    }
+
+    .lineBox {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 92px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .header {
+        display: none;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .pcLibInfo {
+        display: block;
+    }
+
+    .wrapMiddle {
+        display: block;
+    }
+
+    .pcHeader {
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .gnb {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        font-size: 14px;
+        margin-bottom: 5px;
+        z-index: 1;
+    }
+
+    .gnb .signUp {
+        margin-right: 60px;
+    }
+
+    .gnb a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        color: #777;
+    }
+
+    .pcHeader .lnb {
+        width: 100%;
+        display: flex;
+        gap: 20px;
+    }
+
+    .pcHeader .logo {
+        flex: 1;
+    }
+
+    .pcHeader .menus {
+        gap: 25px;
+        align-items: flex-start;
+        height: 30px;
+        overflow: hidden;
+        transition: all 0.4s;
+    }
+
+    .pcHeader .innerHeader {
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+        box-shadow: none;
+    }
+
+
+    .innerMenu {
+        padding-top: 50px;
+        /* display: none; */
+        line-height: 1.6;
+    }
+
+    .innerMenu a {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .innerMenu a:hover {
+        font-weight: 700;
+    }
+
+
+    .menus {
+        display: flex;
+        align-items: center;
+        z-index: 1;
+    }
+
+
+    .pcmainWrapper {
+        background: #f3f3f3;
+        padding: 20px 0;
+    }
+
+    .pcmainWrapper .pcContainer {
+        width: 100%;
+        display: flex;
+        padding: 0 20px;
+        gap: 15px;
+    }
+
+    .pcContainer>* {
+        flex: 1;
+    }
+
+    .pcmainWrapper .container {
+        padding: 0;
+        width: 100%;
+    }
+
+    .pcContainer .bookMenu {
+        display: none;
+        flex: 0.5;
+        flex-direction: column;
+    }
+
+    .offday .offdaySchedule div {}
+
+
+    .offday {
+        padding: 0;
+    }
+
+    .offday h2 {
+        display: none;
+    }
+
+    .currentLib {
+        height: 100%;
+    }
+
+    .currentLib .libImg {
+        height: 100%;
+        border-radius: 1rem;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .libImg .pcLibInfo {
+        position: absolute;
+        bottom: 0;
+        padding: 15px;
+        background: white;
+        width: 100%;
+    }
+
+    .libImg .pcLibInfo h3 {
+        font-weight: 800;
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    .libImg img {
+        height: calc(100% - 83px);
+    }
+
+    .bookMenu {
+        display: block;
+        font-family: pretendard, 'NanumSquare', sans-serif;
+        padding: 20px 0;
+        background: #f3f3f3;
+    }
+
+    .bookMenu h2 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .bookMenu ul {
+        display: flex;
+        justify-content: space-around;
+        gap: 10px;
+        margin: 10px;
+    }
+
+    .bookMenu ul li {
+        background: white;
+        width: 100%;
+        text-align: center;
+        border-radius: 1rem;
+        transition: all 0.3s;
+    }
+
+    .bookMenu ul li a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        font-size: 19px;
+        font-weight: 700;
+        transition: all 0.3s;
+    }
+
+    .bookMenu ul li:hover {
+        box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+        background: var(--blue);
+    }
+
+
+    /* 오시는길 / 도서관 변경 */
+
+    .wrapMiddle .container {
+        display: flex;
+        gap: 20px;
+        font-family: pretendard, 'NanumSquare', sans-serif;
+    }
+
+
+    .wrapMiddle .map {
+        flex: 1.4;
+    }
+
+    .wrapMiddle .changeCurLib {
+        flex: 1;
+    }
+
+    .map .mapBox {
+        height: 250px;
+        background: white;
+        border-radius: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .map .way {
+        line-height: 1.6;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .way .mapAddr::before {
+        content: "주소";
+        background: #222;
+        color: white;
+        padding: 1px 3px;
+        margin-right: 10px;
+        font-weight: 500;
+        font-size: 13px;
+    }
+
+    .way .mapTel::before {
+        content: "전화";
+        background: #222;
+        color: white;
+        padding: 1px 3px;
+        margin-right: 10px;
+        font-weight: 500;
+        font-size: 13px;
+
+    }
+
+    .way .mapFax::before {
+        content: "팩스";
+        background: #222;
+        color: white;
+        padding: 1px 3px;
+        margin-right: 10px;
+        font-weight: 500;
+        font-size: 13px;
+
+    }
+
+    .wrapMiddle h2 {
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .quickChangeLib {
+        background: #f3f3f3;
+    }
+
+    .quickChangeLib .container {
+        padding: 0;
+
+    }
+
+    .quickChangeLib ul {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        overflow: hidden;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .quickChangeLib ul li {
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 600;
+        color: #666;
+        padding: 15px 5px;
+    }
+
+    .quickChangeLib ul li.active {
+        background: var(--blue);
+        font-weight: 700;
+        color: #333;
+        border: none;
+    }
+
+    .changeCurLib ul {
+        display: grid;
+        height: 90%;
+        grid-template-columns: repeat(3, 1fr);
+        place-items: center;
+        background: #f3f3f3;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+
+    .changeCurLib ul li {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 17px;
+        font-weight: 700;
+    }
+
+    .changeCurLib ul li:hover {
+        background: var(--sky);
+    }
+
+    .changeCurLib ul li.selected {
+        background: var(--blue);
+        z-index: 11;
+    }
+
+
+    .notice-pre {
+        font-size: 14px;
+    }
+
+    .newsTitle h2 {
+        margin: 0;
+    }
+
+    .newsList li a {
+        font-size: 14px;
+    }
+
+    .newsTitle span a {
+        font-size: 14px;
+    }
+
+    /* pc 푸터 */
+
+
+    .pcFooter {
+        display: block;
+        background: #f3f3f3;
+        box-shadow: none;
+        font-family: pretendard, 'NanumSquare', sans-serif;
+        font-size: 15px;
+    }
+
+    .pcFooter .term {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .pcFooter .term li a {
+        font-weight: 500;
+    }
+
+    .pcFooter .title h2 {
+        margin-bottom: 10px;
+        font-size: 22px;
+        position: relative;
+        margin-top: 10px;
+    }
+
+    .inquire {
+        display: flex;
+
+    }
+
+
+    .siteInfo {
+        font-size: 14px;
+        color: #999;
+    }
+
+
+    .inquire,
+    .othersite,
+    .otherLibSite {
+        display: flex;
+    }
+
+    .pcFooter ul {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    h4.footerTitle {
+        min-width: 160px;
+        z-index: 111;
+    }
+
+    .pcFooter {
+        line-height: 1.8;
+        overflow: hidden;
+    }
+
+    .pcFooter .container {
+        position: relative;
+    }
+
+    .pcFooter .decoCir01 {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: var(--yellow);
+        position: absolute;
+        bottom: 100px;
+        left: -40px;
+    }
+
+    .pcFooter .decoCir02 {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: var(--blue);
+        position: absolute;
+        bottom: 50px;
+        right: 40px;
+    }
+
+
+    .otherLibSite ul li,
+    .othersite ul li {
+        margin-right: 20px;
+        z-index: 111;
+    }
+
+    .siteInfo p {
+        font-size: 13px;
+    }
+
+    /*퀵메뉴 */
+
+    .quickSide {
+        position: fixed;
+        bottom: 30%;
+        background: white;
+        border-radius: 0 1rem 1rem 0;
+        box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        z-index: 111;
+    }
+
+    .quickSide ul {
+        padding: 40px 20px;
+        line-height: 1.6;
+        position: relative;
+    }
+
+    .quickSide ul li {
+        font-size: 18px;
+    }
+
+    .quickSide li:hover a {
+        font-weight: 700;
+    }
+
+    .quickTitle {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .quickDeco {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: var(--yellow);
+        border-radius: 50%;
+        top: -10%;
+        left: -25%;
+        z-index: -1;
+    }
+
+}
+
+@media all and (min-width: 1281px) {
+    .container {
+        width: 1280px;
+        margin: 0 auto;
+    }
+
+    .pcHeader .innerHeader {
+        width: 1280px;
+        margin: 0 auto;
+        box-shadow: none;
+    }
+
+    .pcmainWrapper .pcContainer {
+        width: 1280px;
+        margin: 0 auto;
+    }
+
+    .pcHeader .menus {
+        gap: 30px;
+    }
+
+    .pcHeader .menus li {
+        width: 130px;
+    }
+
+
+}
