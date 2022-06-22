@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @charset "utf-8";
+
+      a:focus,
+      button:focus {
+        outline: 1px dotted #000;
+      }
+      .more {
+        display: block;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50px;
+        height: 50px;
+        border: 0;
+        font-size: 0;
+      }
+      .more:before,
+      .more:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+      }
+      .more:before {
+        width: calc(100% / 2);
+        height: 1px;
+        background: #b2b2b2;
+      }
+      .more:after {
+        width: 1px;
+        height: calc(100% / 2);
+        background: #b2b2b2;
+      }
+      button[data-control] {
+        position: relative;
+        display: inline-block;
+        margin: 0 -4px;
+        width: 25px;
+        height: 25px;
+        vertical-align: middle;
+        overflow: hidden;
+      }
+      button[data-control]:before,
+      button[data-control]:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+      }
+      button[data-control="prev"]:before,
+      button[data-control="next"]:before {
+        width: calc(100% / 2.5);
+        height: calc(100% / 2.5);
+        border-width: 2px;
+        border-style: solid;
+        border-color: #333;
+        transform: rotate(45deg);
+      }
+      button[data-control="prev"]:before {
+        right: -5px;
+        border-width: 0 0 2px 2px;
+      }
+      button[data-control="next"]:before {
+        left: -5px;
+        border-width: 2px 2px 0 0;
+      }
+      button[data-control="stop"]:before {
+        width: 2px;
+        height: calc(100% / 2);
+        box-shadow: -3px 0 #333, 3px 0 #333;
+      }
+      button[data-control="play"]:before {
+        right: -5px;
+        width: 0;
+        height: 0;
+        border-width: 10px 0 10px 15px;
+        border-style: solid;
+        border-color: transparent transparent transparent #333;
+      }
+
+      .layout {
+        position: relative;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1360px;
+      }
+      .clear {
+        clear: none;
+      }
+      .clear:after,
+      .layout:after {
+        display: block;
+        visibility: hidden;
+        clear: both;
+        content: "";
+      }
+      .c_ir {
+        background-image: url(/template/B/images/ico_ir.png);
+      }
+      #tnb {
+        display: none;
+      }
+      #ajaxLayer {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 9999;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+      }
+
+      #top_layout {
+        display: block;
+        position: relative;
+        z-index: 15;
+        width: 100%;
+        text-align: center;
+        background: #fff;
+      }
+      #top_layout.on {
+        z-index: 9999;
+      }
+      #top_layout .top_wrap {
+        height: 110px;
+        padding: 0 40px 0 55px;
+      }
+      #top_layout .top_wrap #logo {
+        display: inline-block;
+        float: left;
+        z-index: 9;
+        position: relative;
+        padding: 34px 0 0;
+        vertical-align: top;
+      }
+      #top_layout .top_wrap #logo a {
+        display: inline-block;
+        vertical-align: top;
+      }
+      #top_layout .top_wrap #logo a span {
+        display: inline-block;
+        width: 151px;
+        height: 45px;
+        background-image: url(/images/science/common/logo.png);
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        vertical-align: top;
+        font-size: 0;
+      }
+      #top_layout .top_wrap #logo a em {
+        display: inline-block;
+        line-height: 42px;
+        font-size: 26px;
+        font-weight: bold;
+        color: #4c4d4f;
+        letter-spacing: -0.07em;
+      }
+      #top_layout .top_wrap #logo a em:before {
+        display: inline-block;
+        content: "";
+        width: 1px;
+        height: 27px;
+        margin: 0 13px;
+        background: #e9e9e9;
+        vertical-align: middle;
+      }
+      #top_layout .top_wrap .utile_wrap {
+        display: inline-block;
+        float: right;
+        height: 110px;
+        vertical-align: top;
+      }
+      #top_layout .top_wrap .utile_wrap li {
+        float: left;
+        position: relative;
+        z-index: 11;
+        height: 100%;
+        margin: 0 0 0 35px;
+        vertical-align: top;
+      }
+      #top_layout .top_wrap .utile_wrap li.h {
+        width: 48px;
+        height: 48px;
+        margin-top: 31px;
+        border-radius: 50%;
+        border: 1px solid #e5e8eb;
+      }
+      #top_layout .top_wrap .utile_wrap li.h a {
+        display: block;
+      }
+      #top_layout .top_wrap .utile_wrap li.h span {
+        display: block;
+        width: 16px;
+        height: 17px;
+        margin: 14px auto 0;
+        background: url(/template/B/images/h.png) no-repeat;
+        font-size: 0;
+      }
+      #top_layout
+        .top_wrap
+        .utile_wrap
+        li.lang
+        .clickOpen_lang
+        > div
+        .inner
+        span {
+        display: block;
+      }
+      #top_layout
+        .top_wrap
+        .utile_wrap
+        li.lang
+        .clickOpen_lang
+        > div
+        .inner
+        span
+        a {
+        display: block;
+        width: 100%;
+        margin: 5px 0;
+        color: #000;
+        font-size: 15px;
+        text-align: left;
+        transition: all 0.3s;
+      }
+      #top_layout
+        .top_wrap
+        .utile_wrap
+        li.lang
+        .clickOpen_lang
+        > div
+        .inner
+        span
+        a:hover,
+      #top_layout
+        .top_wrap
+        .utile_wrap
+        li.lang
+        .clickOpen_lang
+        > div
+        .inner
+        span
+        a:focus {
+        text-decoration: underline;
+      }
+      #top_layout .top_wrap .utile_wrap li.pc {
+      }
+      #top_layout .top_wrap .utile_wrap li.mo {
+        display: none;
+      }
+      #top_layout .top_wrap .utile_wrap li.pc a,
+      #top_layout .top_wrap .utile_wrap li.mo button {
+        display: block;
+        width: 30px;
+        height: 100%;
+        border: none;
+        background: url(/images/science/common/menu.png) no-repeat center;
+        font-size: 0;
+      }
+      #top_layout .top_wrap .utile_wrap li.log {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+      }
+      #top_layout .top_wrap .utile_wrap li.log a {
+        width: 38px;
+        height: 38px;
+        line-height: 1;
+        font-size: 0;
+        border: 0 solid #000;
+        background: #4768be url(/images/science/common/log.png) center no-repeat;
+        border-radius: 50%;
+      }
+      #top_layout.on + .gnb_bg {
+        display: block;
+        z-index: 99;
+      }
+      #top_layout + .gnb_bg {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        opacity: 0.5;
+        content: "";
+        transition: all 0.3s ease-out;
+        -webkit-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+        -moz-transition: all 0.3s ease-out;
+      }
+      .modal-open #top_layout .top_wrap #logo {
+        z-index: -1;
+      }
+
+      #gnb_layout {
+        display: block !important;
+        overflow: hidden;
+        position: absolute;
+        top: 0px;
+        left: 0;
+        width: 100%;
+        height: 90px;
+        min-height: 90px;
+        transition: all 0.3s ease-out;
+        -webkit-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+        -moz-transition: all 0.3s ease-out;
+      }
+      #gnb_layout:after {
+        top: 110px;
+      }
+      #gnb_layout.open {
+      }
+      #gnb_layout.open:after {
+        position: absolute;
+        top: 110px;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: auto;
+        border-top: 1px solid #eee;
+        background: #fff url(/images/science/common/gnb_bg.jpg) no-repeat left
+          20%;
+        content: "";
+      }
+      #gnb_layout.open:before {
+        display: block;
+        content: "";
+      }
+      #gnb {
+        position: absolute;
+        top: 0px;
+        left: 0;
+        width: 100%;
+        height: 110px;
+        z-index: 2;
+      }
+      #gnb_layout.action {
+        position: relative;
+        background-color: #fff;
+      }
+      #gnb_layout .layout {
+        position: relative;
+        height: 100%;
+        text-align: center;
+      }
+      #gnb {
+        position: absolute;
+        top: 0px;
+        left: 0;
+        width: 100%;
+        height: 110px;
+        min-height: 110px;
+        background: #fff;
+        border-bottom: 1px solid #e9e9e9;
+      }
+      #gnb_layout .depth1_ul {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        text-align: center;
+      }
+      #gnb_layout .depth1_ul:after {
+        display: block;
+        content: "";
+        clear: both;
+      }
+      #gnb_layout .depth1_ul > li {
+        display: inline-block;
+        text-align: center;
+        vertical-align: top;
+      }
+      #gnb_layout.open .depth1_ul {
+      }
+      #gnb .gnb_wrap > .depth1_ul > li > .item .gnb-title {
+        display: none;
+      }
+      #gnb .gnb_wrap > .depth1_ul > li > a {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      #gnb .gnb_wrap > .depth1_ul > li > a > span {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        line-height: 110px;
+        padding: 0 30px;
+        font-size: 18px;
+        font-weight: 700;
+        color: #190d0f;
+        letter-spacing: -0.02em;
+        transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+      }
+      #gnb .gnb_wrap > .depth1_ul > li > a > span:before {
+        display: block;
+        opacity: 0;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 0;
+        height: 3px;
+        content: "";
+        background: #2f68c2;
+        transition: all 0.3s ease-out;
+        -webkit-transition: all 0.3s ease-out;
+      }
+      #top_layout.on #gnb .gnb_wrap > .depth1_ul > li.on > a > span:before {
+        opacity: 1;
+        width: 78px;
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+      }
+      #gnb .gnb_wrap > .depth1_ul > li > .item {
+        position: relative;
+        padding: 40px 20px;
+        transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+      }
+      #gnb .gnb_wrap > .depth1_ul > li.n3 > .item {
+        width: 180px;
+      }
+      #gnb .gnb_wrap > .depth1_ul > li > .item:after {
+        display: block;
+        position: absolute;
+        content: "";
+        right: 0;
+        top: 40px;
+        bottom: 40px;
+        width: 1px;
+        height: auto;
+        background: #e4e4e4;
+      }
+      #gnb .gnb_wrap > .depth1_ul > li:last-child > .item:after {
+        display: none;
+      }
+
+      #gnb .gnb_wrap > .depth1_ul > li > .item .depth2_ul {
+        height: 100%;
+        transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+      }
+      #gnb .gnb_wrap > .depth1_ul > li > .item .depth2_ul > li {
+      }
+      #gnb .gnb_wrap > .depth1_ul > li > .item .depth2_ul > li > a {
+        display: block;
+        position: relative;
+        padding: 5px 25px 5px 10px;
+        font-size: 15px;
+        color: #100608;
+        text-align: left;
+      }
+      #gnb
+        .gnb_wrap
+        > .depth1_ul
+        > li
+        > .item
+        .depth2_ul
+        > li
+        > a[target="_blank"]:before {
+        display: inline-block;
+        position: absolute;
+        top: 7px;
+        right: 7px;
+        width: 11px;
+        height: 12px;
+        background: url(/template/B/images/target.png) no-repeat;
+        border: 0;
+        border-radius: 0;
+        transform: none;
+        content: "";
+        vertical-align: middle;
+      }
+      #gnb .gnb_wrap > .depth1_ul > li > .item .depth2_ul > li > a:after {
+        display: block;
+        opacity: 0;
+        position: absolute;
+        content: "";
+        left: 0;
+        bottom: 1px;
+        width: 100%;
+        height: 1px;
+        background: #407ee0;
+        transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+      }
+      #gnb .gnb_wrap > .depth1_ul > li > .item .depth2_ul > li > a:hover,
+      #gnb .gnb_wrap > .depth1_ul > li > .item .depth2_ul > li > a:focus {
+      }
+      #gnb .gnb_wrap > .depth1_ul > li > .item .depth2_ul > li > a:hover:before,
+      #gnb
+        .gnb_wrap
+        > .depth1_ul
+        > li
+        > .item
+        .depth2_ul
+        > li
+        > a:focus:before {
+        display: block;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        z-index: 2;
+        width: 4px;
+        height: 4px;
+        margin-top: -2px;
+        border-radius: 50%;
+        background: #407ee0;
+        content: "";
+      }
+      #gnb
+        .gnb_wrap
+        > .depth1_ul
+        > li
+        > .item
+        .depth2_ul
+        > li
+        > a[target="_blank"]:hover:before,
+      #gnb
+        .gnb_wrap
+        > .depth1_ul
+        > li
+        > .item
+        .depth2_ul
+        > li
+        > a[target="_blank"]:focus:before {
+        display: inline-block;
+        position: absolute;
+        top: 7px;
+        right: 7px;
+        width: 11px;
+        height: 12px;
+        margin: 0;
+        background: url(/template/B/images/target.png) no-repeat;
+        border: 0;
+        border-radius: 0;
+        transform: none;
+        content: "";
+        vertical-align: middle;
+      }
+
+      #gnb .gnb_wrap > .depth1_ul > li > .item .depth2_ul > li > a:hover:after,
+      #gnb .gnb_wrap > .depth1_ul > li > .item .depth2_ul > li > a:focus:after {
+        opacity: 1;
+      }
+      #gnb .gnb_wrap > .depth1_ul > li > .item .depth2_ul > li > a > span {
+        display: inline-block;
+        position: relative;
+        font-size: 15px;
+        z-index: 2;
+        vertical-align: middle;
+      }
+      #gnb .gnb_wrap > .depth1_ul > li > .item .depth2_ul > li .depth3_ul {
+        display: none;
+      }
+
+      #top_layout.on #gnb_layout .depth1_ul > li.on > a > span {
+        color: #2f68c2;
+      }
+      #gnb .gnb_wrap > .depth1_ul > li > .item .depth2_ul > li > a:hover > span,
+      #gnb
+        .gnb_wrap
+        > .depth1_ul
+        > li
+        > .item
+        .depth2_ul
+        > li
+        > a:focus
+        > span {
+        color: #2f68c2;
+      }
+
+      #body_layout {
+        display: block;
+        width: 100%;
+      }
+
+      @media (max-width: 1719px) {
+        #top_layout .top_wrap {
+          padding: 0 40px;
+        }
+        #top_layout .top_wrap #logo {
+          padding: 37.5px 0 0;
+        }
+        #top_layout .top_wrap #logo a span {
+          width: 107px;
+          height: 35px;
+          background-size: auto 35px;
+        }
+        #top_layout .top_wrap #logo a em {
+          line-height: 35px;
+          font-size: 21px;
+        }
+
+        #gnb .gnb_wrap > .depth1_ul > li > a > span {
+          padding: 0 20px;
+          font-size: 17px;
+        }
+        #gnb .gnb_wrap > .depth1_ul > li > .item {
+          position: absolute;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n4 > li > .item {
+          width: 25%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n4 > li.n1 > .item {
+          left: 0;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n4 > li.n2 > .item {
+          left: 25%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n4 > li.n3 > .item {
+          left: 50%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n4 > li.n4 > .item {
+          left: 75%;
+        }
+
+        #gnb .gnb_wrap > .depth1_ul.n5 > li > .item {
+          width: 20%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n5 > li.n1 > .item {
+          left: 0;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n5 > li.n2 > .item {
+          left: 20%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n5 > li.n3 > .item {
+          left: 40%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n5 > li.n4 > .item {
+          left: 60%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n5 > li.n5 > .item {
+          left: 80%;
+        }
+
+        #gnb .gnb_wrap > .depth1_ul.n6 > li > .item {
+          width: 16.66%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n6 > li.n1 > .item {
+          left: 0;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n6 > li.n2 > .item {
+          left: 16.66%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n6 > li.n3 > .item {
+          left: 33.32%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n6 > li.n4 > .item {
+          left: 49.98%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n6 > li.n5 > .item {
+          left: 66.64%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n6 > li.n6 > .item {
+          left: 83.3%;
+        }
+
+        #gnb .gnb_wrap > .depth1_ul.n7 > li > .item {
+          width: 14.285714%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n7 > li.n1 > .item {
+          left: 0;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n7 > li.n2 > .item {
+          left: 14.285714%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n7 > li.n3 > .item {
+          left: 28.5714%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n7 > li.n4 > .item {
+          left: 42.85714%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n7 > li.n5 > .item {
+          left: 57.152856%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n7 > li.n6 > .item {
+          left: 71.43857%;
+        }
+        #gnb .gnb_wrap > .depth1_ul.n7 > li.n7 > .item {
+          left: 85.724284%;
+        }
+      }
+
+      @media (max-width: 1439px) {
+        .layout {
+          max-width: 100%;
+          padding: 0 40px;
+        }
+
+        #gnb_layout .depth1_ul > li .item .gnb-title {
+          padding: 65px 20px 0 40px;
+        }
+      }
+
+      @media (max-width: 1279px) {
+        #top_layout .top_wrap #logo a span {
+        }
+        #top_layout .top_wrap .utile_wrap li.lang,
+        #top_layout .top_wrap .utile_wrap li.pc {
+          display: none;
+        }
+        #top_layout .top_wrap .utile_wrap li.mo {
+          display: block;
+        }
+
+        #gnb_layout {
+          display: none !important;
+        }
+      }
+
+      @media (max-width: 1023px) {
+        .layout {
+          padding: 0 35px;
+        }
+
+        #top_layout .top_wrap {
+          height: 95px;
+          padding: 0 35px;
+        }
+        #top_layout .top_wrap #logo {
+          padding: 29px 0 0;
+        }
+        #top_layout .top_wrap #logo a span {
+          width: 110px;
+          height: 37px;
+          background-size: auto 37px;
+        }
+        #top_layout .top_wrap #logo a em {
+          line-height: 37px;
+          font-size: 20px;
+        }
+        #top_layout .top_wrap #logo a em:before {
+          height: 18px;
+          margin: -1px 10px 0;
+        }
+        #top_layout .top_wrap .utile_wrap {
+          height: 95px;
+        }
+        #top_layout .top_wrap .utile_wrap li {
+          margin: 0;
+        }
+        #top_layout .top_wrap .utile_wrap li.h {
+          display: none;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .layout {
+          padding: 0 20px;
+        }
+        #top_layout .top_wrap {
+          padding: 0 20px;
+        }
+      }
+
+      @media (max-width: 500px) {
+        #top_layout .top_wrap #logo {
+          padding: 32px 0 0;
+        }
+        #top_layout .top_wrap #logo a span {
+          width: 93px;
+          height: 31px;
+          background-size: auto 31px;
+        }
+        #top_layout .top_wrap #logo a em {
+          line-height: 31px;
+          font-size: 18px;
+        }
+        #top_layout .top_wrap #logo a em:before {
+          height: 15px;
+          margin: -3px 8px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top_wrap clear">
+      <h1 class="logo_wrap" id="logo">
+        <a href="/science/index.do" title="유성 다과상"
+          ><span>유성다과상 </span></a
+        >
+      </h1>
+      <ul class="utile_wrap clear">
+        <li class="log"><a href="/science/login.do">로그인</a></li>
+        <li class="box pc">
+          <a id="btnAllmenu" href="/science/sitemap.do">전체메뉴</a>
+        </li>
+        <li class="box mo">
+          <button
+            type="button"
+            class="btn-allmenu ir-tmpl"
+            data-toggle="modal"
+            data-target="#mobile-menu"
+          >
+            전체메뉴
+          </button>
+        </li>
+      </ul>
+    </div>
+    <nav id="gnb_layout">
+      <div id="gnb">
+        <!-- 공통메뉴틀 시작 -->
+        <div class="gnb_wrap layout">
+          <!-- 메뉴 시작 -->
+
+          <ul class="depth1_ul n7">
+            <li class="n1">
+              <a class="th_1st" href="/science/sub01.do"
+                ><span>유성다과상 소개</span></a
+              >
+              <div class="item">
+                <div class="gnb-title">
+                  <strong>유성다과상 소개</strong>
+                  <p>
+                    다함께 더 좋은 유성!<br />과학과 온천의 관광도시 유성입니다.
+                  </p>
+                </div>
+                <ul class="depth2_ul depth2_1"></ul>
+              </div>
+            </li>
+
+            <li class="n2">
+              <a class="th_1st" href="/science/sub02.do"
+                ><span>프로그램 안내</span></a
+              >
+              <div class="item">
+                <div class="gnb-title">
+                  <strong>프로그램 안내</strong>
+                  <p>
+                    다함께 더 좋은 유성!<br />과학과 온천의 관광도시 유성입니다.
+                  </p>
+                </div>
+                <ul class="depth2_ul depth2_2"></ul>
+              </div>
+            </li>
+
+            <li class="n3">
+              <a class="th_1st" href="/prog/rfrshtabl/science/sub03_01/list.do"
+                ><span>신청예약</span></a
+              >
+              <div class="item">
+                <div class="gnb-title">
+                  <strong>신청예약</strong>
+                  <p>
+                    다함께 더 좋은 유성!<br />과학과 온천의 관광도시 유성입니다.
+                  </p>
+                </div>
+                <ul class="depth2_ul depth2_3">
+                  <li class="n3_1">
+                    <a
+                      href="/prog/rfrshtabl/science/sub03_01/list.do"
+                      class=""
+                      data-menu="depth2"
+                      ><span>행사신청</span></a
+                    >
+                  </li>
+
+                  <li class="n3_2">
+                    <a
+                      href="/prog/rfrshtablReqst/science/sub03_02/list.do"
+                      class=""
+                      data-menu="depth2"
+                      ><span>신청조회</span></a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="n4">
+              <a
+                class="th_1st"
+                href="/prog/ebook/science/sub04_01/VOL_01/list.do"
+                ><span>나DO나DO</span></a
+              >
+              <div class="item">
+                <div class="gnb-title">
+                  <strong>나DO나DO</strong>
+                  <p>
+                    다함께 더 좋은 유성!<br />과학과 온천의 관광도시 유성입니다.
+                  </p>
+                </div>
+                <ul class="depth2_ul depth2_4">
+                  <li class="n4_1">
+                    <a
+                      href="/prog/ebook/science/sub04_01/VOL_01/list.do"
+                      class=""
+                      data-menu="depth2"
+                      ><span>vol. 1</span></a
+                    >
+                  </li>
+
+                  <li class="n4_2">
+                    <a
+                      href="/prog/ebook/science/sub04_02/VOL_02/list.do"
+                      class=""
+                      data-menu="depth2"
+                      ><span>vol. 2</span></a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="n5">
+              <a class="th_1st" href="/bbs/BBSMSTR_000000000295.do"
+                ><span>소통마당</span></a
+              >
+              <div class="item">
+                <div class="gnb-title">
+                  <strong>소통마당</strong>
+                  <p>
+                    다함께 더 좋은 유성!<br />과학과 온천의 관광도시 유성입니다.
+                  </p>
+                </div>
+                <ul class="depth2_ul depth2_5">
+                  <li class="n5_1">
+                    <a
+                      href="/bbs/BBSMSTR_000000000295.do"
+                      class=""
+                      data-menu="depth2"
+                      ><span>공지사항</span></a
+                    >
+                  </li>
+
+                  <li class="n5_2">
+                    <a
+                      href="/bbs/BBSMSTR_000000000293.do"
+                      class=""
+                      data-menu="depth2"
+                      ><span>참여후기</span></a
+                    >
+                  </li>
+
+                  <li class="n5_3">
+                    <a
+                      href="/bbs/BBSMSTR_000000000292.do"
+                      class=""
+                      data-menu="depth2"
+                      ><span>갤러리</span></a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="n6">
+              <a class="th_1st" href="/science/sub06_01_01.do"
+                ><span>유성과학축제(S&F)</span></a
+              >
+              <div class="item">
+                <div class="gnb-title">
+                  <strong>유성과학축제(S&F)</strong>
+                  <p>
+                    다함께 더 좋은 유성!<br />과학과 온천의 관광도시 유성입니다.
+                  </p>
+                </div>
+                <ul class="depth2_ul depth2_6">
+                  <li class="n6_1">
+                    <a
+                      href="/science/sub06_01_01.do"
+                      class=""
+                      data-menu="depth2"
+                      ><span>축제 개요</span></a
+                    >
+
+                    <ul class="depth3_ul">
+                      <li>
+                        <a
+                          href="/science/sub06_01_01.do"
+                          data-code=""
+                          data-menu="depth3"
+                          ><span>축제소개</span></a
+                        >
+                      </li>
+
+                      <li>
+                        <a
+                          href="/science/sub06_01_02.do"
+                          data-code=""
+                          data-menu="depth3"
+                          ><span>모시는 글</span></a
+                        >
+                      </li>
+
+                      <li>
+                        <a
+                          href="/science/sub06_01_03.do"
+                          data-code=""
+                          data-menu="depth3"
+                          ><span>축제 일정</span></a
+                        >
+                      </li>
+
+                      <li>
+                        <a
+                          href="/science/sub06_01_04.do"
+                          data-code=""
+                          data-menu="depth3"
+                          ><span>오시는 길</span></a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li class="n6_2">
+                    <a href="/science/sub06_02.do" class="" data-menu="depth2"
+                      ><span>프로그램</span></a
+                    >
+                  </li>
+
+                  <li class="n6_3">
+                    <a href="/science/sub06_03.do" class="" data-menu="depth2"
+                      ><span>이벤트</span></a
+                    >
+                  </li>
+
+                  <li class="n6_4">
+                    <a
+                      href="/science/sub06_04_01.do"
+                      class=""
+                      data-menu="depth2"
+                      ><span>지난 행사 보기</span></a
+                    >
+
+                    <ul class="depth3_ul">
+                      <li>
+                        <a
+                          href="/science/sub06_04_01.do"
+                          data-code=""
+                          data-menu="depth3"
+                          ><span>제1회 유성과학축제</span></a
+                        >
+                      </li>
+
+                      <li>
+                        <a
+                          href="/science/sub06_04_02.do"
+                          data-code=""
+                          data-menu="depth3"
+                          ><span>제2회 유성과학축제</span></a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="n7">
+              <a
+                class="th_1st"
+                href="/prog/rfrshtabl/science/sub07_01/list.do?searchRfrshtablEventSeCode=RF_EVSE_02"
+                ><span>과학동네 소식</span></a
+              >
+              <div class="item">
+                <div class="gnb-title">
+                  <strong>과학동네 소식</strong>
+                  <p>
+                    다함께 더 좋은 유성!<br />과학과 온천의 관광도시 유성입니다.
+                  </p>
+                </div>
+                <ul class="depth2_ul depth2_7">
+                  <li class="n7_1">
+                    <a
+                      href="/prog/rfrshtabl/science/sub07_01/list.do?searchRfrshtablEventSeCode=RF_EVSE_02"
+                      class=""
+                      data-menu="depth2"
+                      ><span>대덕특구 행사</span></a
+                    >
+                  </li>
+
+                  <li class="n7_2">
+                    <a
+                      href="/bbs/BBSMSTR_000000000291.do"
+                      class=""
+                      data-menu="depth2"
+                      ><span>과학 뉴스</span></a
+                    >
+                  </li>
+
+                  <li class="n7_3">
+                    <a href="/science/sub07_03.do" class="" data-menu="depth2"
+                      ><span>연구원 바로가기</span></a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <!-- 메뉴 끝 -->
+        </div>
+        <span class="line"></span>
+
+        <!-- 공통메뉴틀 끝 -->
+      </div>
+    </nav>
+  </body>
+</html>
