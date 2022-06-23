@@ -104,15 +104,27 @@
 
     <div class="pcHeader">
         <div class="innerPcHeader">
-            <div class="gnb"></div>
+            <div class="gnb">
+                <ul>
+                    <li><a href="#!">로그인</a></li>
+                    <li><a href="#!">회원가입</a></li>
+                </ul>
+            </div>
+            <div class="lnb">
             <div class="logo">
                 <h1><a href="main.html">도서관사업소</a></h1>
             </div>
-            <div class="lnb">
+            <div class="menus">
                 <ul>
-                    <li></li>
+                    <li><a href="#!">테스트</a></li>
+                    <li><a href="#!">테스트</a></li>
+                    <li><a href="#!">테스트</a></li>
+                    <li><a href="#!">테스트</a></li>
+                    <li><a href="#!">테스트</a></li>
                 </ul>
             </div>
+            </div>
+            
         </div>
     </div>
 
@@ -121,15 +133,15 @@
             <div class="currentLibWrapper">
                 <section class="currentLib">
                     <div class="libImg">
-                        <img src="../img/lib.jpg" alt="도서관 사진">
+                        <img src="../img/lib2.jpg" alt="도서관 사진">
                         <div class="pcLibInfo">
-                            <h3><span>성산</span>도서관</h3>
+                            <h3><span>창원중앙</span>도서관</h3>
                             <p><a href="#!">홈페이지 바로가기</a></p>
                         </div>
                     </div>
                     
                     <div class="currentLibInfo">
-                        <h2>상남도서관</h2>
+                        <h2>창원중앙도서관</h2>
                         <h3><a href="#!">상세위치 <i class="fa-solid fa-angle-right"></i></a></h3>
                         <h3><a href="#!">홈페이지 <i class="fa-solid fa-angle-right"></i></a>
                         </h3>
@@ -139,9 +151,9 @@
                 <section class="selectLib">
                     <input type="checkbox" id="showSelectLib" class="showSelectLib">
                     <div class="libraryBox">
-                        <div>중앙</div>
+                        <div class="selected">중앙</div>
                         <div>성산</div>
-                        <div class="selected">상남</div>
+                        <div>상남</div>
                         <div>최윤덕</div>
                         <div>고향의봄</div>
                         <div>명곡</div>
@@ -182,42 +194,56 @@
 
                     <div class="offday">
                         <h2>
-                            <span class="currentTitle">상남</span>도서관<br>휴관일, 운영시간
+                            <span class="currentTitle">창원중앙</span>도서관<br>
+                            <span class="subTitle">휴관일, 운영시간</span>
                         </h2>
                         <div class="offdaySchedule">
                             <div>
-                                <h3>종합 자료실<br>디지털‧연속간행물실</h3>
+                                <h3>어린이자료실<br>생활문화공간 다락</h3>
                                 <p><span>화~금</span>09:00 ~ 22:00</p>
                                 <p><span>주말</span>09:00 ~ 18:00</p>
                             </div>
                             <div>
-                                <h3>유아‧어린이자료실</h3>
-                                <p><span>화~일</span>09:00 ~ 18:00</p>
+                                <h3>종합자료실<br>
+                                    디지털‧연속간행물실</h3>
+                                <p><span>월~목</span>09:00 ~ 18:00</p>
+                                <p><span>토~일</span>09:00 ~ 18:00</p>
                             </div>
                             <div>
                                 <h3>자율학습실</h3>
                                 <p><span>월~일</span>08:00 ~ 22:00</p>
                             </div>
                         </div>
+                        
                     </div>
+
+                  
             </section>
         </div>
     </div>
 
-    <!-- <section class="bookMenu">
+    <section class="bookMenu">
         <div class="container">
             <h2>도서 메뉴</h2>
             <ul>
-                <li><a href="#!">대출 조회</a></li>
-                <li><a href="#!">반납 연기</a></li>
-                <li><a href="#!">도서 예약 조회</a></li>
-                <li><a href="#!">전자 도서관</a></li>
-            </ul>
+                <li><div class="icon">
+                    <img src="../img/shopping-cart.png" alt="">
+                </div><p><a href="#!">대출 조회</a></p></li>
+                <li><div class="icon">
+                    <img src="../img/arrows.png" alt="">
+                </div><p><a href="#!">반납 연기</a></p></li>
+                <li><div class="icon">
+                    <img src="../img/diary.png" alt="">
+                </div><p><a href="#!">도서 예약 조회</a></p></li>
+                <li><div class="icon">
+                    <img src="../img/folders.png" alt="">
+                </div><p><a href="#!">전자 도서관</a></p></li>
+                </ul>
         </div>
-    </section> -->
+    </section>
 
-    <div class="wrapMiddle">
-        <div class="container">
+
+        <!-- <div class="container">
             <section class="map">
                 <h2>오시는길</h2>
                 <div class="mapBox"></div>
@@ -227,11 +253,15 @@
                     <p class="mapFax"> 055-225-4801 </p>
                 </div>
             </section>
+        </div> -->
+
             <section class="changeCurLib">
+                <div class="openTag">
                 <h2>도서관 변경</h2>
-                <ul>
-                    <li>창원중앙</li>
-                    <li class="selected">성산</li>
+            </div>
+                <ul class="sideLibSelect">
+                    <li class="selected">창원중앙</li>
+                    <li >성산</li>
                     <li>상남</li>
                     <li>최윤덕</li>
                     <li>고향의봄</li>
@@ -244,12 +274,64 @@
                     <li>동부</li>
                 </ul>
             </section>
-        </div>
-    </div>
 
-    <section class="news container">
+    <section class="pcSearch">
+        <h2>책을 검색해 보세요</h2>
+        <div class="inputBox">
+        <input type="text" placeholder="인플레이션에서 살아남기 | 오건영">
+        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+    </section>
+
+
+    <section class="recommend">
+        <h2>인기 도서</h2>
+        <div class="floatingBox">
+            <div class="floatingItem">
+                <div class="imgBox">
+                    <img src="../img/눈아이.jpg" alt="">
+                </div>
+                
+            </div>
+            <div class="floatingItem">
+                <div class="imgBox">
+                    <img src="../img/젊은작가상.jpg" alt="">
+                </div>
+                
+            </div>
+            <div class="floatingItem">
+                <div class="imgBox">
+                    <img src="../img/지구끝의온실.jpg" alt="">
+                </div>
+                
+            </div>
+            <div class="floatingItem">
+                <div class="imgBox">
+                    <img src="../img/눈토끼식당차림표.jpg" alt="">
+                </div>
+                
+            </div>
+            <div class="floatingItem">
+                <div class="imgBox">
+                    <img src="../img/어떻게물리학을.jpg" alt="">
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+
+    <section class="etc">
+        <div class="container">
+        <div class="ad">
+            <div class="adContent">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div class="news">
         <div class="newsTitle">
-            <h2><span class="currentnewsTitle">상남</span>도서관 소식</h2>
+            <h2><span class="currentnewsTitle">창원중앙</span>도서관 소식</h2>
             <span><a href="#!">더보기</a></span>
         </div>
         <ul class="newsList">
@@ -278,6 +360,8 @@
                 </a>
             </li>
         </ul>
+        </div>
+    </div>
     </section>
 
     <footer class="footer">
@@ -295,8 +379,6 @@
 
     <footer class="pcFooter">
         <div class="container">
-            <div class="decoCir01"></div>
-            <div class="decoCir02"></div>
             <div class="title">
                 <h2>도서관사업소</h2>
             </div>
