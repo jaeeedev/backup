@@ -244,6 +244,8 @@ h2 {
   grid-template-columns: repeat(4, 1fr);
   place-items: center;
   transition: all 0.3s;
+  z-index: 11;
+  position: relative;
 }
 
 .libraryBox div {
@@ -639,7 +641,7 @@ h2 {
   .lnb .menus ul {
     display: flex;
     justify-content: flex-end;
-    gap: 10vw;
+    gap: 4.8vw;
   }
 
   .lnb .menus ul a {
@@ -647,6 +649,15 @@ h2 {
     width: 100%;
     height: 100%;
     color: white;
+  }
+
+  .depth_1 li a {
+    display: block;
+  }
+
+  .depth_2 {
+    position: absolute;
+    padding-top: 10px;
   }
 
   .pcContainer > * {
@@ -657,6 +668,14 @@ h2 {
 
   .main {
     text-align: center;
+  }
+
+  .waveDeco {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    height: 500px;
   }
 
   .main .container {
@@ -1081,11 +1100,21 @@ h2 {
   /* pc 푸터 */
 
   .pcFooter {
+    position: relative;
     display: block;
     background: #f3f3f3;
     box-shadow: none;
     font-family: pretendard, "NanumSquare", sans-serif;
     font-size: 15px;
+  }
+
+  .bgWave {
+    width: 100%;
+    height: 100%;
+    background: url("../img/deco01.png") no-repeat;
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 
   .pcFooter .term {
@@ -1216,6 +1245,12 @@ h2 {
   .container {
     max-width: 1280px;
     margin: 0 auto;
+  }
+
+  .lnb .menus ul {
+    display: flex;
+    justify-content: flex-end;
+    gap: 7vw;
   }
 
   .currentLib .libImg {
