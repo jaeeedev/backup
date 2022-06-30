@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Visit Busan</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+    />
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script
       src="https://kit.fontawesome.com/7cde33c3cd.js"
       crossorigin="anonymous"
@@ -45,9 +50,65 @@
     </header>
 
     <section class="main">
-      <div class="main_bg">
-        <div class="main_slide"></div>
+      <div class="main_container">
+        <div class="main_slide">
+          <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+              <!-- Slides -->
+              <div class="swiper-slide">
+                <div class="slide_img">
+                  <div class="img_box">
+                    <img src="./img/yeonhee-Dr9wWzvWrCo-unsplash.jpg" alt="" />
+                  </div>
+                </div>
+                <div class="slide_text">
+                  <p>
+                    <a href="#!">나에게 딱 맞는 부산여행 코스, 여기서 골라봐</a>
+                  </p>
+                  <h2><a href="#!">부산을 머무르는 다양한 방법</a></h2>
+                  <div class="slide_more"><a href="#!">자세히 보기</a></div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="slide_img">
+                  <div class="img_box">
+                    <img src="./img/slide02.jfif" alt="" />
+                  </div>
+                </div>
+                <div class="slide_text">
+                  <p>
+                    <a href="#!">푸른빛 부산을 담고 달리는</a>
+                  </p>
+                  <h2><a href="#!">부산시티투어 블루라인 드라이브</a></h2>
+                  <div class="slide_more"><a href="#!">자세히 보기</a></div>
+                </div>
+              </div>
+              <div class="swiper-slide">Slide 3</div>
+              ...
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <section class="quick_menu">
+      <h2>퀵메뉴</h2>
+      <p>여행에 필요한 서비스를 이용해보세요.</p>
+      <ul class="quick_list">
+        <li>
+          <a href="#!"></a>
+          <p><a href="#!">가이드북&지도</a></p>
+        </li>
+        <li><a href="#!"></a></li>
+        <li><a href="#!"></a></li>
+        <li><a href="#!"></a></li>
+        <li><a href="#!"></a></li>
+        <li><a href="#!"></a></li>
+      </ul>
     </section>
 
     <section class="recommend">
@@ -65,24 +126,18 @@
           <div class="monthly_content">
             <a href="#!">
               <div class="monthly_img">
-                <img
-                  src="./img/christopher-lee-ZaMyD-31snk-unsplash.jpg"
-                  alt=""
-                />
+                <img src="./img/monthly01.jfif" alt="" />
               </div>
               <div class="monthly_text">
                 <h3>부산 시티투어 블루라인 드라이브</h3>
-                <p>대충 텍스트를 떄려넣는다<br />하루종일 이거만 하고있다</p>
+                <p>대충 텍스트를 떄려넣는다 하루종일 이거만 하고있다</p>
               </div>
             </a>
           </div>
           <div class="monthly_content">
             <a href="#!">
               <div class="monthly_img">
-                <img
-                  src="./img/christopher-lee-ZaMyD-31snk-unsplash.jpg"
-                  alt=""
-                />
+                <img src="./img/monthly02.jfif" alt="" />
               </div>
               <div class="monthly_text">
                 <h3>야경투어 브릿지 드라이브</h3>
@@ -93,12 +148,10 @@
           <div class="monthly_content">
             <a href="#!">
               <div class="monthly_img">
-                <img
-                  src="./img/christopher-lee-ZaMyD-31snk-unsplash.jpg"
-                  alt=""
-                />
+                <img src="./img/monthly03.jfif" alt="" />
               </div>
               <div class="monthly_text">
+                <h3>부산을 머무르는 다양한 방법</h3>
                 <p></p>
               </div>
             </a>
@@ -106,12 +159,10 @@
           <div class="monthly_content">
             <a href="#!">
               <div class="monthly_img">
-                <img
-                  src="./img/christopher-lee-ZaMyD-31snk-unsplash.jpg"
-                  alt=""
-                />
+                <img src="./img/monthly04.jfif" alt="" />
               </div>
               <div class="monthly_text">
+                <h3>봄바람 부는 섬으로 떠나는 2박 3일</h3>
                 <p></p>
               </div>
             </a>
@@ -119,20 +170,78 @@
           <div class="monthly_content">
             <a href="#!">
               <div class="monthly_img">
-                <img
-                  src="./img/christopher-lee-ZaMyD-31snk-unsplash.jpg"
-                  alt=""
-                />
+                <img src="./img/monthly05.jfif" alt="" />
               </div>
               <div class="monthly_text">
+                <h3>문화로 소통하는 복합문화공간 KT</h3>
                 <p></p>
               </div>
             </a>
           </div>
         </div>
-        <div class="best_busan"></div>
+        <div class="best_busan none">
+          <div class="best_content">
+            <a href="#!">
+              <div class="best_img">
+                <img src="./img/best01.jfif" alt="" />
+              </div>
+              <div class="best_text">
+                <h3>2박 3일에 완성하는 부산 완전정복</h3>
+                <p></p>
+              </div>
+            </a>
+          </div>
+          <div class="best_content">
+            <a href="#!">
+              <div class="best_img">
+                <img src="./img/best02.jfif" alt="" />
+              </div>
+              <div class="best_text">
+                <h3>부산 바다의 정석, 해운대 해수욕장</h3>
+                <p></p>
+              </div>
+            </a>
+          </div>
+          <div class="best_content">
+            <a href="#!">
+              <div class="best_img">
+                <img src="./img/best03.jfif" alt="" />
+              </div>
+              <div class="best_text">
+                <h3>태종대에서 만난 오색찬란 수국의 매력</h3>
+                <p></p>
+              </div>
+            </a>
+          </div>
+          <div class="best_content">
+            <a href="#!">
+              <div class="best_img">
+                <img src="./img/best04.jfif" alt="" />
+              </div>
+              <div class="best_text">
+                <h3>광안리의 밤은 당신의 낮보다 아름답다</h3>
+                <p></p>
+              </div>
+            </a>
+          </div>
+          <div class="best_content">
+            <a href="#!">
+              <div class="best_img">
+                <img src="./img/best05.jfif" alt="" />
+              </div>
+              <div class="best_text">
+                <h3>가파른 절벽 끝에 흰여울문화마을</h3>
+                <p></p>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
+
+    <section class="banner"></section>
+
+    <section class="sea"></section>
 
     <section class="notice">
       <div class="inner_container">
@@ -210,10 +319,10 @@
             <li><a href="#!">약관</a></li>
             <li><a href="#!">행정서비스현황</a></li>
             <li><a href="#!">뷰어다운로드</a></li>
+            <p class="footer_copyright">
+              Copyright Busan Metropolitan City. All rights reserved.
+            </p>
           </ul>
-          <p class="footer_copyright">
-            Copyright Busan Metropolitan City. All rights reserved.
-          </p>
           <div class="contact">
             <div class="question">
               <h4>관광 문의</h4>
@@ -227,10 +336,18 @@
           </div>
         </div>
         <div class="footer_sns">
-          <span class="youtube"><a href="#!"></a></span>
-          <span class="facebook"><a href="#!"></a></span>
-          <span class="instagram"><a href="#!"></a></span>
-          <span class="blog"><a href="#!"></a></span>
+          <span class="youtube"
+            ><a href="#!"><i class="fa-brands fa-youtube"></i></a
+          ></span>
+          <span class="facebook"
+            ><a href="#!"><i class="fa-brands fa-facebook-f"></i></a
+          ></span>
+          <span class="instagram"
+            ><a href="#!"><i class="fa-brands fa-instagram"></i></a
+          ></span>
+          <span class="blog"
+            ><a href="#!"><i class="fa-brands fa-blogger-b"></i></a
+          ></span>
         </div>
       </div>
     </footer>

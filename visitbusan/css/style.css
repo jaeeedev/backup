@@ -1,15 +1,9 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
-@font-face {
-  font-family: "S-CoreDream-7ExtraBold";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-7ExtraBold.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
+
 :root {
   --blue: #356ed5;
   --deepblue: #215fd1;
-  --bgsky: rgb(232, 240, 245);
+  --bgsky: #edf6fd;
 }
 
 /* h2 폰트패밀리 알아서 발랄한걸로 바꿔라~~ */
@@ -42,7 +36,7 @@ img {
 }
 
 .inner_container {
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 /* 헤더 */
@@ -51,8 +45,11 @@ img {
 }
 
 @media all and (min-width: 769px) {
+  .header {
+  }
+
   .inner_header {
-    width: 1280px;
+    width: 1400px;
     margin: 0 auto;
   }
 
@@ -70,13 +67,18 @@ img {
     padding: 3px 10px;
     border-radius: 1rem;
     outline: none;
-    border: 2px solid #ccc;
+    border: none;
     font-size: 16px;
   }
 
   .logo_bg {
-    background: #ccc;
+    width: 100px;
+    background: var(--blue);
     padding: 10px;
+  }
+
+  .logo_bg img {
+    width: 100%;
   }
 
   .gnb .others span a {
@@ -103,6 +105,11 @@ img {
 
   .lnb_first li a {
     padding: 10px;
+    display: block;
+  }
+
+  .lnb_first li a:hover {
+    color: var(--deepblue);
   }
 
   /* 메인 */
@@ -110,16 +117,135 @@ img {
     margin-bottom: 60px;
   }
 
-  .main .main_bg {
-    width: 100%;
+  .main_slide {
     height: 700px;
+  }
+
+  .main_container {
+    width: 100%;
+    margin: 0 auto;
+    height: 700px;
+  }
+
+  .main .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .main .swiper-slide {
+    display: flex;
+  }
+
+  .main .slide_img {
+    flex: 1;
+  }
+
+  .main .img_box {
+    width: 450px;
+    height: 450px;
+    background: white;
+    border-radius: 50%;
+    margin: 50% auto;
+    transform: translateY(-50%);
+    overflow: hidden;
+  }
+
+  .img_box img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .main .slide_text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .slide_text p a {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .slide_text h2 a {
+    display: block;
+    font-size: 42px;
+    margin-bottom: 20px;
+  }
+
+  .slide_more a {
+    display: block;
+    font-size: 22px;
+    padding: 10px 20px;
+    border: 2px solid #222;
+    border-radius: 2rem;
+    transition: all 0.4s;
+  }
+
+  .slide_more a:hover,
+  .slide_more a:active {
+    background: #222;
+    color: white;
+  }
+
+  /* 퀵메뉴 */
+
+  .quick_menu {
+    text-align: center;
+    width: 100%;
+    background: #f3f3f3;
+    padding: 50px 0;
+  }
+
+  .quick_menu h2 {
+    font-size: 30px;
+    margin-bottom: 7px;
+  }
+
+  .quick_menu p {
+    color: var(--deepblue);
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 30px;
+  }
+
+  .quick_menu .quick_list {
+    display: flex;
+    gap: 30px;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .quick_list li {
+    width: 130px;
+    height: 130px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.4s;
+  }
+
+  .quick_list li > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+  }
+
+  .quick_list li:hover {
+    box-shadow: 0 3px 7px rgb(0 0 0 / 13%);
+    transform: translateY(-5%);
     background: var(--blue);
   }
 
   /* 추천 */
 
   .recommend {
+    padding: 60px 0;
     margin-bottom: 60px;
+    background: var(--bgsky);
   }
 
   .recommend_title {
@@ -127,7 +253,6 @@ img {
   }
 
   .recommend_title h2 {
-    font-family: "S-CoreDream-7ExtraBold";
     font-size: 40px;
     font-weight: 800;
     margin-bottom: 5px;
@@ -136,6 +261,7 @@ img {
   .recommend_title p {
     font-size: 18px;
     margin-bottom: 20px;
+    color: var(--deepblue);
   }
 
   .recommend_switch {
@@ -147,9 +273,9 @@ img {
     overflow: hidden;
     font-weight: 700;
     z-index: 1;
-    background: #ccc;
+    background: var(--blue);
     margin-bottom: 30px;
-    border: 2px solid #ccc;
+    border: 2px solid var(--blue);
     overflow: hidden;
   }
 
@@ -177,56 +303,83 @@ img {
     width: 130px;
   }
 
-  .monthly_busan {
+  .monthly_busan,
+  .best_busan {
     display: flex;
     justify-content: space-between;
     gap: 20px;
   }
 
-  .monthly_busan > div {
+  .best_busan.none,
+  .monthly_busan.none {
+    display: none;
+  }
+  .monthly_busan > div,
+  .best_busan > div {
     flex: 1;
     min-width: 250px;
     height: 300px;
     background: #fff;
     border-radius: 1rem;
     overflow: hidden;
-    box-shadow: 2px 5px 13px 0px rgb(0 0 0 / 13%);
   }
 
-  .monthly_content a {
+  .monthly_content a,
+  .best_content a {
     display: block;
   }
 
-  .monthly_img {
-    width: 250px;
+  .monthly_img,
+  .best_img {
+    width: 100%;
     height: 180px;
     background: #ddd;
   }
 
-  .monthly_img img {
+  .monthly_img img,
+  .best_img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .monthly_text {
-    padding: 15px;
+  .monthly_text,
+  .best_text {
+    padding: 20px;
+    height: 118px;
   }
 
   .monthly_text h3 {
     width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     font-size: 20px;
     margin-bottom: 10px;
   }
 
-  .monthly_text p {
-    line-height: 1.4;
+  .monthly_text p,
+  .best_text p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     color: #666;
   }
+
   /* 공지사항 */
+
+  .notice {
+    padding: 50px 0;
+    position: relative;
+  }
+
+  .notice::before {
+    content: "";
+    position: absolute;
+    background: url("../img/wavebg.png");
+    width: 100%;
+    height: 500px;
+    z-index: -1;
+    top: -5%;
+    left: 0;
+  }
 
   .notice .inner_container {
     display: flex;
@@ -242,7 +395,6 @@ img {
     white-space: nowrap;
   }
   .notice_title h2 {
-    font-family: "S-CoreDream-7ExtraBold";
     font-size: 43px;
     font-weight: 800;
     margin-bottom: 10px;
@@ -297,6 +449,17 @@ img {
   .notice_content i {
     font-size: 13px;
     color: #888;
+  }
+
+  .inner_footer {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  .footer_text {
+    display: flex;
+    gap: 60px;
   }
 }
 
